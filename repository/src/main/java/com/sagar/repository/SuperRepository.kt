@@ -8,10 +8,10 @@ import com.google.gson.reflect.TypeToken
 import com.sagar.android.logutilmaster.LogUtil
 import com.sagar.livedata.SuperMutableLiveData
 import com.sagar.modelsandenums.enums.ResultType
+import com.sagar.modelsandenums.enums.StatusCode
 import com.sagar.modelsandenums.models.Event
 import com.sagar.modelsandenums.models.Result
 import com.sagar.repository.contracts.SuperRepositoryCallback
-import com.sagar.repository.enums.StatusCode
 import com.sagar.repository.models.NetworkCallTime
 import io.reactivex.Completable
 import io.reactivex.Observable
