@@ -42,7 +42,11 @@ abstract class SuperRepository {
     var ERROR_MESSAGE_DATABASE_ERROR = ""
 
     lateinit var logUtilForSuper: LogUtil
+
     ////////////////////////////////////////////////////////////////////////////////////////////////
+    abstract fun saveTopInset(topInset: Int)
+
+    abstract fun getTopInset(): Int
 
     var networkCallTimeMaster: NetworkCallTimeMaster = NetworkCallTimeMaster()
 
