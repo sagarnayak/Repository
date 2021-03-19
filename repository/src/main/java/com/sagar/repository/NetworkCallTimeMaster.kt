@@ -17,6 +17,8 @@ class NetworkCallTimeMaster {
     protected val networkCallTimes: ArrayList<NetworkCallTime> = ArrayList()
     protected var networkSpeed = NetworkSpeed.CAN_NOT_DETERMINE
 
+    fun getCurrentNetworkSpeed() = networkSpeed
+
     fun gotNetworkCallTime(newNetworkCallTime: NetworkCallTime) {
         newNetworkCallTime.timeTaken = newNetworkCallTime.endTime - newNetworkCallTime.startTime
         networkCallTimes.add(newNetworkCallTime)
