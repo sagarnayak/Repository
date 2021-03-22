@@ -433,6 +433,7 @@ abstract class SuperRepository {
             val toParse = response.body()
 
             if (
+                responseIsOnlyString &&
                 T::class.java.newInstance() is String
             ) {
                 val stringResponse = toParse as T
