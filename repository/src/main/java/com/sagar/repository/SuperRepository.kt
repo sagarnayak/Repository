@@ -103,7 +103,8 @@ abstract class SuperRepository {
         successMutableLiveData: MutableLiveData<Event<T>>? = null,
         errorMutableLiveData: MutableLiveData<Event<Result>>? = null,
         superMutableLiveData: SuperMutableLiveData<T>? = null,
-        ignoreUnAuthorisedResponse: Boolean = false
+        ignoreUnAuthorisedResponse: Boolean = false,
+        responseIsOnlyString: Boolean = false
     ) {
         val networkCallTime = NetworkCallTime(startTime = Calendar.getInstance().timeInMillis)
 
@@ -132,7 +133,8 @@ abstract class SuperRepository {
                                     successMutableLiveData,
                                     errorMutableLiveData,
                                     t,
-                                    superMutableLiveData
+                                    superMutableLiveData,
+                                    responseIsOnlyString
                                 )
                             }
                             StatusCode.Created.code -> {
@@ -144,7 +146,8 @@ abstract class SuperRepository {
                                     successMutableLiveData,
                                     errorMutableLiveData,
                                     t,
-                                    superMutableLiveData
+                                    superMutableLiveData,
+                                    responseIsOnlyString
                                 )
                             }
                             StatusCode.Unauthorized.code -> {
@@ -414,7 +417,7 @@ abstract class SuperRepository {
         errorMutableLiveData: MutableLiveData<Event<Result>>? = null,
         response: Response<ResponseBody>,
         superMutableLiveData: SuperMutableLiveData<T>? = null,
-        responseIsOnlyString: Boolean = false
+        responseIsOnlyString: Boolean
     ) {
         if (lookForOnlySuccessCode) {
             successMutableLiveData?.postValue(
