@@ -439,7 +439,7 @@ abstract class SuperRepository {
                 responseIsOnlyString &&
                 T::class.java.newInstance() is String
             ) {
-                val stringResponse = toParse as T
+                val stringResponse = toParse!!.string() as T
                 val eventToReturn = Event(
                     stringResponse
                 )
