@@ -413,7 +413,8 @@ abstract class SuperRepository {
         successMutableLiveData: MutableLiveData<Event<T>>? = null,
         errorMutableLiveData: MutableLiveData<Event<Result>>? = null,
         response: Response<ResponseBody>,
-        superMutableLiveData: SuperMutableLiveData<T>? = null
+        superMutableLiveData: SuperMutableLiveData<T>? = null,
+        responseIsOnlyString: Boolean = false
     ) {
         if (lookForOnlySuccessCode) {
             successMutableLiveData?.postValue(
@@ -430,6 +431,26 @@ abstract class SuperRepository {
         }
         try {
             val toParse = response.body()
+
+            if (
+                T::class.java.newInstance() is String
+            ) {
+                val stringResponse = toParse as T
+                val eventToReturn = Event(
+                    stringResponse
+                )
+                successMutableLiveData?.postValue(
+                    eventToReturn
+                )
+                superMutableLiveData?.getSuccess()?.postValue(
+                    eventToReturn
+                )
+                callback?.success(
+                    stringResponse
+                )
+                return
+            }
+
             val jsonObject = JSONObject(toParse!!.string())
 
             var statusReply = Result(
@@ -528,7 +549,8 @@ abstract class SuperRepository {
             logThisError(ex.toString())
             val errorReply = Result(
                 StatusCode.FailedToParseData.code,
-                "Failed to parse data",
+                type = "Failed to parse data",
+                message = "Failed to parse data",
                 result = ResultType.FAIL
             )
             errorMutableLiveData?.postValue(
