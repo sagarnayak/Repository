@@ -54,6 +54,8 @@ abstract class SuperRepository {
         return Gson().fromJson(json, object : TypeToken<T>() {}.type)
     }
 
+    fun toJson(argument: Any) = Gson().toJson(argument)!!
+
     fun logThisError(error: String) {
         if (this::logUtilForSuper.isInitialized) {
             logUtilForSuper.logE(error)
