@@ -471,12 +471,10 @@ abstract class SuperRepository {
                 doesItHasStatusObject
             ) {
                 val code = jsonObject.getInt("code")
-                val message = jsonObject.getString("message")
 
                 statusReply =
                     Result(
                         code = code,
-                        message = message,
                         result = ResultType.OK
                     )
             }
